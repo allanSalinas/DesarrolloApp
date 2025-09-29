@@ -1,0 +1,27 @@
+booksmart-mvvm/
+├── 📁 di/                          # Inyección de Dependencias
+│   └── Module.kt
+├── 📁 view/                        # CAPA VIEW
+│   ├── Main.kt
+│   └── components/                 # Componentes de UI (si fuera Android)
+│       ├── CatalogScreen.kt
+│       └── LoanScreen.kt
+├── 📁 viewmodel/                   # CAPA VIEWMODEL
+│   ├── BibliotecaViewModel.kt
+│   └── state/                      # Estados de UI
+│       └── UiState.kt
+├── 📁 model/                       # CAPA MODEL
+│   ├── repository/
+│   │   ├── BibliotecaRepository.kt
+│   │   └── interfaces/             # Abstractiones
+│   │       └── IBibliotecaRepository.kt
+│   ├── entities/                   # Entidades de dominio
+│   │   ├── Libro.kt
+│   │   ├── Usuario.kt
+│   │   ├── Prestamo.kt
+│   │   └── EstadoPrestamo.kt
+│   └── usecases/                   # Casos de uso
+│       ├── ProcessLoanUseCase.kt
+│       └── GenerateReportUseCase.kt
+└── 📁 common/                      # Utilidades comunes
+    └── Extensions.kt
