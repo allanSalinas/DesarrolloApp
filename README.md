@@ -40,6 +40,7 @@ XML	Diseño de interfaz de usuario
 GitHub	Control de versiones y colaboración
 Jira	Gestión ágil de tareas (Scrum)
 Firebase (futuro)	Persistencia de datos (planeado para iteración 2)
+
 🧱 Estructura del proyecto
 📦 AppMedicalConsulta
  ┣ 📂 app
