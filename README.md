@@ -61,3 +61,19 @@ CRUD completo de profesionales.
 
 Conexión a base de datos externa.
 
+
+
+🔗 Recursos del proyecto
+
+🧾 Tablero Jira: [URL_del_tablero_Jira_aquí]
+
+💾 Repositorio GitHub: [URL_del_repositorio_aquí]
+
+🧱 Ramas:
+
+dev → Desarrollo activo
+
+qa → Pruebas
+
+prod → Versión final estable
+
