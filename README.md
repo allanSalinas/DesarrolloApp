@@ -1,12 +1,6 @@
-🩺 appMedicalConsulta – Sistema de Reservas Médicas
-
-Proyecto académico – Evaluación Parcial 2 – DSY1105
-Desarrollado en Kotlin (Android Studio)
-Metodología: Scrum / Gestión en Jira
-
 📘 Descripción general
 
-MediTime App es una aplicación móvil desarrollada en Kotlin que permite gestionar reservas y atenciones médicas, brindando una interfaz simple para pacientes y profesionales de la salud.
+MedicalConsulta App es una aplicación móvil desarrollada en Kotlin que permite gestionar reservas y atenciones médicas, brindando una interfaz simple para pacientes y profesionales de la salud.
 El proyecto corresponde al Caso N°4 – Consultas médicas, reservas u horas de atención, propuesto en la evaluación parcial 2 del curso Desarrollo de Software y Servicios Web (DSY1105).
 
 Esta primera versión corresponde al MVP (Producto Mínimo Viable), donde el usuario puede:
@@ -41,32 +35,12 @@ GitHub	Control de versiones y colaboración
 Jira	Gestión ágil de tareas (Scrum)
 Firebase (futuro)	Persistencia de datos (planeado para iteración 2)
 
-🧱 Estructura del proyecto
-📦 AppMedicalConsulta
- ┣ 📂 app
- ┣ 📂 src
- ┃ ┣ 📂 main
- ┃ ┃ ┣ 📂 java/com/meditimeapp
- ┃ ┃ ┃ ┣ 📂 ui        → Interfaces gráficas (pantallas)
- ┃ ┃ ┃ ┣ 📂 data      → Clases simuladas (modelos)
- ┃ ┃ ┃ ┣ 📂 logic     → Lógica de reserva y validaciones
- ┃ ┃ ┣ 📂 res         → Recursos XML (layouts, strings, colores)
- ┣ 📄 README.md
- ┣ 📄 build.gradle
- ┗ 📄 settings.gradle
+<img width="786" height="431" alt="image" src="https://github.com/user-attachments/assets/6cf6facf-72b3-467b-88ec-d4189e19b10e" />
 
-🧠 Historias de Usuario (HU)
-Código	Título	Estado
-HU-01	Registro de usuario	✅ MVP
-HU-02	Inicio de sesión	✅ MVP
-HU-03	Visualizar profesionales	✅ MVP
-HU-04	Agendar cita	✅ MVP
-HU-05	Ver historial de citas	✅ MVP
-HU-06	Cerrar sesión	✅ MVP
-HU-07	Modificar / cancelar cita	🔜 Iteración 2
-HU-08	Perfil del profesional	🔜 Iteración 2
-HU-09	Validaciones avanzadas	🔜 Iteración 2
-HU-10	Panel del profesional	🔜 Iteración 3
+
+<img width="755" height="571" alt="image" src="https://github.com/user-attachments/assets/a183c115-f699-466c-9f0b-b0452d5db568" />
+
+
 🧭 Alcance del MVP
 
 El MVP (Producto Mínimo Viable) cubre el flujo completo desde el registro de usuario hasta la reserva de cita médica y su visualización posterior, validando las interacciones clave sin necesidad de una base de datos real.
@@ -86,3 +60,4 @@ Cancelación de citas.
 CRUD completo de profesionales.
 
 Conexión a base de datos externa.
+
