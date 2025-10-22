@@ -35,7 +35,6 @@ GitHub	Control de versiones y colaboración
 Jira	Gestión ágil de tareas (Scrum)
 Firebase (futuro)	Persistencia de datos (planeado para iteración 2)
 
-<img width="786" height="431" alt="image" src="https://github.com/user-attachments/assets/6cf6facf-72b3-467b-88ec-d4189e19b10e" />
 
 
 <img width="755" height="571" alt="image" src="https://github.com/user-attachments/assets/a183c115-f699-466c-9f0b-b0452d5db568" />
