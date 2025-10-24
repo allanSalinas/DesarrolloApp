@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".ui.screen.LoginActivity" />
         <activity android:name=".ui.screen.RegisterActivity" />
+        <activity android:name=".ui.screen.SpecialistListActivity" />
     </application>
 
 </manifest>

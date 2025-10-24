@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val btnRegister = findViewById<Button>(R.id.btnRegister)
+        val btnSpecialists = findViewById<Button>(R.id.btnSpecialists)
 
         btnLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
@@ -20,6 +21,10 @@ class MainActivity : AppCompatActivity() {
 
         btnRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
+        btnSpecialists.setOnClickListener {
+            startActivity(Intent(this, SpecialistListActivity::class.java))
         }
     }
 }
