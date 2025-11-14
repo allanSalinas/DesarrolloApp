@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="537ffe19-1c35-4d9a-a610-6087b33db494" name="Changes" comment="test(register): agregar pruebas unitarias&#10;&#10;- Test de validación de nombre obligatorio&#10;- Test de email inválido&#10;- Test de contraseña corta&#10;- Test de email duplicado&#10;- Test de registro exitoso&#10;- Test de encriptación de contraseña&#10;&#10;Refs #HU-01">
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/AndroidProjectSystem.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/migrations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_specialist_list.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_specialist.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/.placeholder" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/.placeholder" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/.placeholder" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/.placeholder" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/.placeholder" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="DesarrolloApp" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;dief-ysis&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/allanSalinas/DesarrolloApp&quot;,
+    &quot;accountId&quot;: &quot;67f1cfc9-0df2-4329-a463-894c73b27784&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="35S38RnzXEeqwzTOaxreuLaDLxX" />
+  <component name="ProjectReloadState">
+    <option name="STATE" value="1" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "dev",
+    "project.structure.last.edited": "Dependencies",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="537ffe19-1c35-4d9a-a610-6087b33db494" name="Changes" comment="" />
+      <created>1763089486125</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1763089486125</updated>
+    </task>
+    <task id="LOCAL-00001" summary="feat(domain): implementar use cases de autenticación&#10;&#10;- Implementar RegisterUIState con validaciones&#10;- Agregar validaciones de campos obligatorios&#10;- Implementar encriptación SHA-256 para contraseñas&#10;- Crear LoginUseCase para autenticación&#10;&#10;Refs #HU-01 #HU-02">
+      <option name="closed" value="true" />
+      <created>1763090850177</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1763090850177</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat(viewmodel): crear viewmodels de autenticación&#10;&#10;- Implementar RegisterViewModel con manejo de estados&#10;- Crear LoginViewModel para gestión de login&#10;- Agregar lógica de validación de contraseñas&#10;- Gestionar estados de loading y error&#10;&#10;Refs #HU-01 #HU-02">
+      <option name="closed" value="true" />
+      <created>1763090887023</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1763090887023</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat(navigation): implementar sistema de navegación&#10;&#10;- Crear AppNav con rutas principales&#10;- Definir objeto Routes con constantes&#10;- Agregar NavigationActions para facilitar navegación&#10;- Configurar flujo de autenticación&#10;&#10;Refs #HU-01 #HU-02">
+      <option name="closed" value="true" />
+      <created>1763090910471</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1763090910471</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat(ui): diseñar pantallas de autenticación&#10;&#10;- Crear StartScreen como pantalla inicial&#10;- Implementar LoginScreen con validaciones&#10;- Diseñar RegisterScreen con Material 3&#10;- Agregar selector de tipo de usuario&#10;- Mostrar mensajes de error y loading states&#10;&#10;Closes #HU-01 #HU-02">
+      <option name="closed" value="true" />
+      <created>1763090954201</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1763090954201</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat(app): integrar navegación en MainActivity&#10;&#10;- Configurar AppNav como punto de entrada&#10;- Habilitar edge-to-edge display&#10;- Aplicar tema de la aplicación&#10;&#10;Refs #HU-01">
+      <option name="closed" value="true" />
+      <created>1763090971920</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1763090971920</updated>
+    </task>
+    <task id="LOCAL-00006" summary="test(register): agregar pruebas unitarias&#10;&#10;- Test de validación de nombre obligatorio&#10;- Test de email inválido&#10;- Test de contraseña corta&#10;- Test de email duplicado&#10;- Test de registro exitoso&#10;- Test de encriptación de contraseña&#10;&#10;Refs #HU-01">
+      <option name="closed" value="true" />
+      <created>1763090984178</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1763090984178</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat(domain): implementar use cases de autenticación&#10;&#10;- Implementar RegisterUIState con validaciones&#10;- Agregar validaciones de campos obligatorios&#10;- Implementar encriptación SHA-256 para contraseñas&#10;- Crear LoginUseCase para autenticación&#10;&#10;Refs #HU-01 #HU-02" />
+    <MESSAGE value="feat(viewmodel): crear viewmodels de autenticación&#10;&#10;- Implementar RegisterViewModel con manejo de estados&#10;- Crear LoginViewModel para gestión de login&#10;- Agregar lógica de validación de contraseñas&#10;- Gestionar estados de loading y error&#10;&#10;Refs #HU-01 #HU-02" />
+    <MESSAGE value="feat(navigation): implementar sistema de navegación&#10;&#10;- Crear AppNav con rutas principales&#10;- Definir objeto Routes con constantes&#10;- Agregar NavigationActions para facilitar navegación&#10;- Configurar flujo de autenticación&#10;&#10;Refs #HU-01 #HU-02" />
+    <MESSAGE value="feat(ui): diseñar pantallas de autenticación&#10;&#10;- Crear StartScreen como pantalla inicial&#10;- Implementar LoginScreen con validaciones&#10;- Diseñar RegisterScreen con Material 3&#10;- Agregar selector de tipo de usuario&#10;- Mostrar mensajes de error y loading states&#10;&#10;Closes #HU-01 #HU-02" />
+    <MESSAGE value="feat(app): integrar navegación en MainActivity&#10;&#10;- Configurar AppNav como punto de entrada&#10;- Habilitar edge-to-edge display&#10;- Aplicar tema de la aplicación&#10;&#10;Refs #HU-01" />
+    <MESSAGE value="test(register): agregar pruebas unitarias&#10;&#10;- Test de validación de nombre obligatorio&#10;- Test de email inválido&#10;- Test de contraseña corta&#10;- Test de email duplicado&#10;- Test de registro exitoso&#10;- Test de encriptación de contraseña&#10;&#10;Refs #HU-01" />
+    <option name="LAST_COMMIT_MESSAGE" value="test(register): agregar pruebas unitarias&#10;&#10;- Test de validación de nombre obligatorio&#10;- Test de email inválido&#10;- Test de contraseña corta&#10;- Test de email duplicado&#10;- Test de registro exitoso&#10;- Test de encriptación de contraseña&#10;&#10;Refs #HU-01" />
+  </component>
+</project>
