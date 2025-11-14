@@ -4,7 +4,7 @@ import cl.duoc.mediReserva.model.data.entities.UsuarioEntity
 import cl.duoc.mediReserva.model.data.repository.UsuarioRepository
 import java.security.MessageDigest
 
-class RegisterUIState(private val repository: UsuarioRepository) {
+class RegisterUseCase(private val repository: UsuarioRepository) {
 
     suspend operator fun invoke(
         nombreCompleto: String,
