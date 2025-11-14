@@ -1,11 +1,11 @@
-package cl.duoc.mediReserva.model.data.entities
+package cl.duoc.app.model.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.ColumnInfo
 
-@Entity(tableName = "usuarios")
-data class UsuarioEntity(
+@Entity(tableName = "users")
+data class UserEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Int = 0,
