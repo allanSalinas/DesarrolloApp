@@ -1,17 +1,20 @@
-package cl.duoc.app.model.data
+package cl.duoc.mediReserva.model.data.config
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import cl.duoc.app.model.entities.FormularioServicioEntity
-import cl.duoc.app.model.entities.UserEntity
+import cl.duoc.mediReserva.model.data.dao.UsuarioDao
+import cl.duoc.mediReserva.model.data.entities.UsuarioEntity
 
-@Database(entities = [UserEntity::class, FormularioServicioEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [UsuarioEntity::class],
+    version = 1,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun userDao(): UserDao
-    abstract fun formularioServicioDao(): FormularioServicioDao
+    abstract fun usuarioDao(): UsuarioDao
 
     companion object {
         @Volatile
@@ -22,8 +25,10 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "app_database"
-                ).build()
+                    "mediReserva_database"
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }
