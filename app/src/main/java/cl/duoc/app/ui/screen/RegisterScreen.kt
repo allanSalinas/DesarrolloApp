@@ -1,34 +1,56 @@
-package cl.duoc.mediReserva.ui.screen
+package cl.duoc.app.ui.screen
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import cl.duoc.mediReserva.ui.viewmodel.RegisterViewModel
+import cl.duoc.app.navigation.Routes
+import cl.duoc.app.viewmodel.RegisterViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterScreen(
     navController: NavController,
-    viewModel: RegisterViewModel = viewModel()
+    viewModel: RegisterViewModel // Se recibe el ViewModel como parámetro (Inyección de Dependencias)
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val scrollState = rememberScrollState()
 
-    // Navegar cuando el registro sea exitoso
+    // Efecto para navegar solo cuando el registro es exitoso
     LaunchedEffect(uiState.registroExitoso) {
         if (uiState.registroExitoso) {
-            navController.navigate("login") {
-                popUpTo("register") { inclusive = true }
+            navController.navigate(Routes.LOGIN) { // Navega a Login
+                popUpTo(Routes.START) { inclusive = true } // Limpia el stack de navegación
             }
-            viewModel.resetRegistroExitoso()
+            viewModel.resetRegistroExitoso() // Resetea el estado para no navegar de nuevo
         }
     }
 
@@ -50,62 +72,52 @@ fun RegisterScreen(
                 .padding(16.dp)
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            Text("Crea tu cuenta", style = MaterialTheme.typography.headlineMedium)
 
-            Text(
-                text = "Crea tu cuenta",
-                style = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
-
-            // Campo Nombre Completo
             OutlinedTextField(
                 value = uiState.nombreCompleto,
-                onValueChange = { viewModel.onNombreChange(it) },
-                label = { Text("Nombre Completo *") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                isError = uiState.errorMessage?.contains("nombre", ignoreCase = true) == true
-            )
-
-            // Campo Email
-            OutlinedTextField(
-                value = uiState.email,
-                onValueChange = { viewModel.onEmailChange(it) },
-                label = { Text("Email *") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                isError = uiState.errorMessage?.contains("email", ignoreCase = true) == true
-            )
-
-            // Campo Teléfono
-            OutlinedTextField(
-                value = uiState.telefono,
-                onValueChange = { viewModel.onTelefonoChange(it) },
-                label = { Text("Teléfono") },
+                onValueChange = viewModel::onNombreChange,
+                label = { Text("Nombre Completo") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true
             )
 
-            // Selector de Tipo de Usuario
-            Text(
-                text = "Tipo de Usuario *",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.align(Alignment.Start)
+            OutlinedTextField(
+                value = uiState.email,
+                onValueChange = viewModel::onEmailChange,
+                label = { Text("Email") },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true
             )
 
-            Row(
+            OutlinedTextField(
+                value = uiState.password,
+                onValueChange = viewModel::onPasswordChange,
+                label = { Text("Contraseña (mín. 6 caracteres)") },
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
+                singleLine = true,
+                visualTransformation = PasswordVisualTransformation()
+            )
+
+            OutlinedTextField(
+                value = uiState.confirmPassword,
+                onValueChange = viewModel::onConfirmPasswordChange,
+                label = { Text("Confirmar Contraseña") },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                visualTransformation = PasswordVisualTransformation()
+            )
+
+            Text("Soy:", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.align(Alignment.Start))
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                 FilterChip(
                     selected = uiState.tipoUsuario == "PACIENTE",
                     onClick = { viewModel.onTipoUsuarioChange("PACIENTE") },
                     label = { Text("Paciente") },
                     modifier = Modifier.weight(1f)
                 )
-
                 FilterChip(
                     selected = uiState.tipoUsuario == "MEDICO",
                     onClick = { viewModel.onTipoUsuarioChange("MEDICO") },
@@ -114,64 +126,29 @@ fun RegisterScreen(
                 )
             }
 
-            // Campo Contraseña
-            OutlinedTextField(
-                value = uiState.password,
-                onValueChange = { viewModel.onPasswordChange(it) },
-                label = { Text("Contraseña *") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                isError = uiState.errorMessage?.contains("contraseña", ignoreCase = true) == true
-            )
-
-            // Campo Confirmar Contraseña
-            OutlinedTextField(
-                value = uiState.confirmPassword,
-                onValueChange = { viewModel.onConfirmPasswordChange(it) },
-                label = { Text("Confirmar Contraseña *") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                isError = uiState.errorMessage?.contains("contraseña", ignoreCase = true) == true
-            )
-
-            // Mensaje de error
             if (uiState.errorMessage != null) {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.errorContainer
-                    )
-                ) {
+                Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer)) {
                     Text(
-                        text = uiState.errorMessage ?: "",
+                        text = uiState.errorMessage!!,
                         color = MaterialTheme.colorScheme.onErrorContainer,
                         modifier = Modifier.padding(16.dp)
                     )
                 }
             }
 
-            // Botón Registrar
             Button(
-                onClick = { viewModel.registrarUsuario() },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
+                onClick = viewModel::registrarUsuario,
+                modifier = Modifier.fillMaxWidth().height(50.dp),
                 enabled = !uiState.isLoading
             ) {
                 if (uiState.isLoading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
+                    CircularProgressIndicator(modifier = Modifier.size(24.dp), color = MaterialTheme.colorScheme.onPrimary)
                 } else {
                     Text("Registrarse")
                 }
             }
 
-            // Enlace a Login
-            TextButton(onClick = { navController.navigate("login") }) {
+            TextButton(onClick = { navController.navigate(Routes.LOGIN) }) {
                 Text("¿Ya tienes cuenta? Inicia sesión")
             }
         }
