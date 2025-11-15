@@ -4,40 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="537ffe19-1c35-4d9a-a610-6087b33db494" name="Changes" comment="test(register): agregar pruebas unitarias&#10;&#10;- Test de validación de nombre obligatorio&#10;- Test de email inválido&#10;- Test de contraseña corta&#10;- Test de email duplicado&#10;- Test de registro exitoso&#10;- Test de encriptación de contraseña&#10;&#10;Refs #HU-01">
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/AndroidProjectSystem.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/migrations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_foreground.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_specialist_list.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_specialist.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/.placeholder" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/.placeholder" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/.placeholder" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/.placeholder" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/.placeholder" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" beforeDir="false" />
-    </list>
+    <list default="true" id="537ffe19-1c35-4d9a-a610-6087b33db494" name="Changes" comment="config gradle" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -170,7 +137,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763090984178</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="config gradle">
+      <option name="closed" value="true" />
+      <created>1763093305996</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1763093305996</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -180,6 +155,7 @@
     <MESSAGE value="feat(ui): diseñar pantallas de autenticación&#10;&#10;- Crear StartScreen como pantalla inicial&#10;- Implementar LoginScreen con validaciones&#10;- Diseñar RegisterScreen con Material 3&#10;- Agregar selector de tipo de usuario&#10;- Mostrar mensajes de error y loading states&#10;&#10;Closes #HU-01 #HU-02" />
     <MESSAGE value="feat(app): integrar navegación en MainActivity&#10;&#10;- Configurar AppNav como punto de entrada&#10;- Habilitar edge-to-edge display&#10;- Aplicar tema de la aplicación&#10;&#10;Refs #HU-01" />
     <MESSAGE value="test(register): agregar pruebas unitarias&#10;&#10;- Test de validación de nombre obligatorio&#10;- Test de email inválido&#10;- Test de contraseña corta&#10;- Test de email duplicado&#10;- Test de registro exitoso&#10;- Test de encriptación de contraseña&#10;&#10;Refs #HU-01" />
-    <option name="LAST_COMMIT_MESSAGE" value="test(register): agregar pruebas unitarias&#10;&#10;- Test de validación de nombre obligatorio&#10;- Test de email inválido&#10;- Test de contraseña corta&#10;- Test de email duplicado&#10;- Test de registro exitoso&#10;- Test de encriptación de contraseña&#10;&#10;Refs #HU-01" />
+    <MESSAGE value="config gradle" />
+    <option name="LAST_COMMIT_MESSAGE" value="config gradle" />
   </component>
 </project>
