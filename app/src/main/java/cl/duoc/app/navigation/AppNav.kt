@@ -1,15 +1,28 @@
 package cl.duoc.app.navigation
 
+import android.widget.Toast
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import cl.duoc.app.domain.AgendarCitaUseCase
+import cl.duoc.app.domain.LogoutUseCase
+import cl.duoc.app.domain.ObtenerMisReservasUseCase
 import cl.duoc.app.model.data.config.AppDatabase
-import cl.duoc.app.model.domain.RegisterUseCase // ¡CAMBIO! Ahora usamos el UseCase consolidado
+import cl.duoc.app.model.data.repository.AppointmentRepository
+import cl.duoc.app.model.data.repository.SessionRepository
+import cl.duoc.app.model.data.session.SessionManager
+import cl.duoc.app.model.domain.RegisterUseCase
 import cl.duoc.app.model.repository.UserRepository
+import cl.duoc.app.ui.appointment.AppointmentScreen
+import cl.duoc.app.ui.appointment.AppointmentViewModel
+import cl.duoc.app.ui.appointment.MyAppointmentsScreen
+import cl.duoc.app.ui.appointment.MyAppointmentsViewModel
+import cl.duoc.app.ui.screen.HomeScreen
 import cl.duoc.app.ui.screen.LoginScreen
 import cl.duoc.app.ui.screen.RegisterScreen
 import cl.duoc.app.ui.screen.StartScreen
@@ -18,46 +31,102 @@ import cl.duoc.app.viewmodel.RegisterViewModel
 @Composable
 fun AppNav(database: AppDatabase) {
     val navController = rememberNavController()
+    val context = LocalContext.current
+    // Supongamos que el ID de usuario se obtiene del SessionManager
+    val sessionManager = SessionManager(context)
+    val userId = sessionManager.getUserId() ?: 1 // ID de ejemplo si no hay sesión
 
     // --- CREACIÓN DE DEPENDENCIAS ---
     val userDao = database.userDao()
     val userRepository = UserRepository(userDao)
-    val registerUseCase = RegisterUseCase(userRepository) // ¡CAMBIO! Se instancia el UseCase correcto
+    val registerUseCase = RegisterUseCase(userRepository)
+
+    val appointmentDao = database.appointmentDao()
+    val appointmentRepository = AppointmentRepository(appointmentDao)
+    val agendarCitaUseCase = AgendarCitaUseCase(appointmentRepository)
+    val obtenerMisReservasUseCase = ObtenerMisReservasUseCase(appointmentRepository)
+
+    val sessionRepository = SessionRepository(sessionManager)
+    val logoutUseCase = LogoutUseCase(sessionRepository)
 
     NavHost(
         navController = navController,
         startDestination = Routes.START
     ) {
-        // ...
+        composable(Routes.START) {
+            StartScreen(navController = navController)
+        }
+
+        composable(Routes.LOGIN) {
+            // Aquí deberías tener tu LoginViewModel que llame a sessionManager.saveUserId()
+            LoginScreen(navController = navController)
+        }
+
         composable(Routes.REGISTER) {
             val factory = object : ViewModelProvider.Factory {
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
                     if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
                         @Suppress("UNCHECKED_CAST")
-                        // ¡CAMBIO! Se pasa el UseCase correcto a la fábrica del ViewModel
                         return RegisterViewModel(registerUseCase) as T
                     }
                     throw IllegalArgumentException("Unknown ViewModel class")
                 }
             }
-
             val registerViewModel: RegisterViewModel = viewModel(factory = factory)
-
             RegisterScreen(
                 navController = navController,
                 viewModel = registerViewModel
             )
         }
-        // ...
+
+        composable(Routes.HOME) { // 👈 RUTA NUEVA
+             HomeScreen(
+                navController = navController,
+                logoutUseCase = logoutUseCase
+            )
+        }
+
+        composable(Routes.AGENDAR_CITA) {
+            val factory = object : ViewModelProvider.Factory {
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    if (modelClass.isAssignableFrom(AppointmentViewModel::class.java)) {
+                        @Suppress("UNCHECKED_CAST")
+                        return AppointmentViewModel(agendarCitaUseCase, userId) as T
+                    }
+                    throw IllegalArgumentException("Unknown ViewModel class")
+                }
+            }
+            val appointmentViewModel: AppointmentViewModel = viewModel(factory = factory)
+            AppointmentScreen(
+                viewModel = appointmentViewModel,
+                onSuccess = {
+                    Toast.makeText(context, "Cita agendada con éxito", Toast.LENGTH_LONG).show()
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Routes.MIS_RESERVAS) {
+            val factory = object : ViewModelProvider.Factory {
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    if (modelClass.isAssignableFrom(MyAppointmentsViewModel::class.java)) {
+                        @Suppress("UNCHECKED_CAST")
+                        return MyAppointmentsViewModel(obtenerMisReservasUseCase, userId) as T
+                    }
+                    throw IllegalArgumentException("Unknown ViewModel class")
+                }
+            }
+            val myAppointmentsViewModel: MyAppointmentsViewModel = viewModel(factory = factory)
+            MyAppointmentsScreen(viewModel = myAppointmentsViewModel)
+        }
     }
 }
 
-// El objeto Routes y las NavigationActions permanecen igual...
 object Routes {
     const val START = "start"
     const val LOGIN = "login"
     const val REGISTER = "register"
-    const val HOME_PACIENTE = "home_paciente"
-    const val HOME_MEDICO = "home_medico"
-    // ...etc
+    const val HOME = "home" // 👈 RUTA NUEVA
+    const val AGENDAR_CITA = "agendarCita"
+    const val MIS_RESERVAS = "misReservas"
 }
