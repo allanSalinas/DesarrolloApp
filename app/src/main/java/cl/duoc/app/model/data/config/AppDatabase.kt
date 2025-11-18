@@ -1,20 +1,30 @@
-package cl.duoc.mediReserva.model.data.config
+package cl.duoc.app.model.data.config
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import cl.duoc.mediReserva.model.data.dao.UsuarioDao
-import cl.duoc.mediReserva.model.data.entities.UsuarioEntity
+import cl.duoc.app.model.data.dao.AppointmentDao
+import cl.duoc.app.model.data.dao.ProfessionalDao
+import cl.duoc.app.model.data.dao.UserDao
+import cl.duoc.app.model.data.entities.AppointmentEntity
+import cl.duoc.app.model.data.entities.ProfessionalEntity
+import cl.duoc.app.model.data.entities.UserEntity
 
 @Database(
-    entities = [UsuarioEntity::class],
-    version = 1,
+    entities = [
+        UserEntity::class,
+        AppointmentEntity::class,
+        ProfessionalEntity::class
+    ],
+    version = 4, // 👈 VERSIÓN INCREMENTADA A 4
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun usuarioDao(): UsuarioDao
+    abstract fun userDao(): UserDao
+    abstract fun appointmentDao(): AppointmentDao
+    abstract fun professionalDao(): ProfessionalDao
 
     companion object {
         @Volatile
@@ -25,9 +35,9 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "mediReserva_database"
+                    "desarrollo_app_database"
                 )
-                    .fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigration() // NOTA: Usar con cuidado en producción
                     .build()
                 INSTANCE = instance
                 instance
