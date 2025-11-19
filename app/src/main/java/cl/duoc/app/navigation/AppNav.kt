@@ -10,15 +10,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import cl.duoc.app.domain.AgendarCitaUseCase
+import cl.duoc.app.domain.LogoutUseCase
 import cl.duoc.app.domain.ObtenerMisReservasUseCase
 import cl.duoc.app.model.data.config.AppDatabase
 import cl.duoc.app.model.data.repository.AppointmentRepository
+import cl.duoc.app.model.data.repository.SessionRepository
+import cl.duoc.app.model.data.session.SessionManager
 import cl.duoc.app.model.domain.RegisterUseCase
 import cl.duoc.app.model.repository.UserRepository
 import cl.duoc.app.ui.appointment.AppointmentScreen
 import cl.duoc.app.ui.appointment.AppointmentViewModel
 import cl.duoc.app.ui.appointment.MyAppointmentsScreen
 import cl.duoc.app.ui.appointment.MyAppointmentsViewModel
+import cl.duoc.app.ui.screen.HomeScreen
 import cl.duoc.app.ui.screen.LoginScreen
 import cl.duoc.app.ui.screen.RegisterScreen
 import cl.duoc.app.ui.screen.StartScreen
@@ -28,8 +32,9 @@ import cl.duoc.app.viewmodel.RegisterViewModel
 fun AppNav(database: AppDatabase) {
     val navController = rememberNavController()
     val context = LocalContext.current
-    // Supongamos que el ID de usuario se obtiene de algún lugar (p.ej. un ViewModel de sesión)
-    val userId = 1 // ID de usuario de ejemplo
+    // Supongamos que el ID de usuario se obtiene del SessionManager
+    val sessionManager = SessionManager(context)
+    val userId = sessionManager.getUserId() ?: 1 // ID de ejemplo si no hay sesión
 
     // --- CREACIÓN DE DEPENDENCIAS ---
     val userDao = database.userDao()
@@ -41,6 +46,9 @@ fun AppNav(database: AppDatabase) {
     val agendarCitaUseCase = AgendarCitaUseCase(appointmentRepository)
     val obtenerMisReservasUseCase = ObtenerMisReservasUseCase(appointmentRepository)
 
+    val sessionRepository = SessionRepository(sessionManager)
+    val logoutUseCase = LogoutUseCase(sessionRepository)
+
     NavHost(
         navController = navController,
         startDestination = Routes.START
@@ -50,6 +58,7 @@ fun AppNav(database: AppDatabase) {
         }
 
         composable(Routes.LOGIN) {
+            // Aquí deberías tener tu LoginViewModel que llame a sessionManager.saveUserId()
             LoginScreen(navController = navController)
         }
 
@@ -67,6 +76,13 @@ fun AppNav(database: AppDatabase) {
             RegisterScreen(
                 navController = navController,
                 viewModel = registerViewModel
+            )
+        }
+
+        composable(Routes.HOME) { // 👈 RUTA NUEVA
+             HomeScreen(
+                navController = navController,
+                logoutUseCase = logoutUseCase
             )
         }
 
@@ -90,7 +106,7 @@ fun AppNav(database: AppDatabase) {
             )
         }
 
-        composable(Routes.MIS_RESERVAS) { // 👈 RUTA NUEVA
+        composable(Routes.MIS_RESERVAS) {
             val factory = object : ViewModelProvider.Factory {
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
                     if (modelClass.isAssignableFrom(MyAppointmentsViewModel::class.java)) {
@@ -110,8 +126,7 @@ object Routes {
     const val START = "start"
     const val LOGIN = "login"
     const val REGISTER = "register"
+    const val HOME = "home" // 👈 RUTA NUEVA
     const val AGENDAR_CITA = "agendarCita"
-    const val MIS_RESERVAS = "misReservas" // 👈 RUTA NUEVA
-    const val HOME_PACIENTE = "home_paciente"
-    const val HOME_MEDICO = "home_medico"
+    const val MIS_RESERVAS = "misReservas"
 }
