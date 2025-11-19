@@ -1,0 +1,231 @@
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id(\"com.android.application\")\r\n    id(\"org.jetbrains.kotlin.android\")\r\n    // 1. Aplica el plugin KSP que declaramos en el archivo de proyecto\r\n    id(\"com.google.devtools.ksp\")\r\n}\r\n\r\nandroid {\r\n    namespace = \"cl.duoc.app\" // Asegúrate que coincida con tu package name\r\n    compileSdk = 34\r\n\r\n    defaultConfig {\r\n        applicationId = \"cl.duoc.app\"\r\n        minSdk = 26\r\n        targetSdk = 34\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n        vectorDrawables {\r\n            useSupportLibrary = true\r\n        }\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            isMinifyEnabled = false\r\n            proguardFiles(\r\n                getDefaultProguardFile(\"proguard-android-optimize.txt\"),\r\n                \"proguard-rules.pro\"\r\n            )\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_1_8\r\n        targetCompatibility = JavaVersion.VERSION_1_8\r\n    }\r\n    kotlinOptions {\r\n        jvmTarget = \"1.8\"\r\n    }\r\n    buildFeatures {\r\n        compose = true\r\n    }\r\n    composeOptions {\r\n        kotlinCompilerExtensionVersion = \"1.5.8\" // Compatible con Kotlin 1.9.22\r\n    }\r\n    packaging {\r\n        resources {\r\n            excludes += \"/META-INF/{AL2.0,LGPL2.1}\"\r\n        }\r\n    }\r\n}\r\n\r\ndependencies {\r\n    // ---- CORE & UI ----\r\n    implementation(\"androidx.core:core-ktx:1.13.1\")\r\n    implementation(\"androidx.appcompat:appcompat:1.7.0\")\r\n    implementation(\"com.google.android.material:material:1.12.0\")\r\n\r\n    // ---- LIFECYCLE, VIEWMODEL & COROUTINES (para la arquitectura MVVM) ----\r\n    val lifecycleVersion = \"2.8.3\"\r\n    implementation(\"androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion\")\r\n    implementation(\"androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion\")\r\n    implementation(\"androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion\") // Para Compose\r\n\r\n    // ---- COMPOSE (para la UI) ----\r\n    val composeBom = platform(\"androidx.compose:compose-bom:2024.06.00\")\r\n    implementation(composeBom)\r\n    androidTestImplementation(composeBom)\r\n    implementation(\"androidx.compose.ui:ui\")\r\n    implementation(\"androidx.compose.ui:ui-graphics\")\r\n    implementation(\"androidx.compose.ui:ui-tooling-preview\")\r\n    implementation(\"androidx.compose.material3:material3\")\r\n    implementation(\"androidx.activity:activity-compose:1.9.0\")\r\n    debugImplementation(\"androidx.compose.ui:ui-tooling\")\r\n    debugImplementation(\"androidx.compose.ui:ui-test-manifest\")\r\n\r\n    // ---- ROOM (para la base de datos local) ----\r\n    val roomVersion = \"2.6.1\"\r\n    implementation(\"androidx.room:room-runtime:$roomVersion\")\r\n    implementation(\"androidx.room:room-ktx:$roomVersion\") // Para usar corrutinas con Room\r\n    // 2. Usa KSP para el procesador de anotaciones de Room\r\n    ksp(\"androidx.room:room-compiler:$roomVersion\")\r\n\r\n    // ---- TESTING ----\r\n    testImplementation(\"junit:junit:4.13.2\")\r\n    androidTestImplementation(\"androidx.test.ext:junit:1.2.1\")\r\n    androidTestImplementation(\"androidx.test.espresso:espresso-core:3.6.1\")\r\n    testImplementation(\"io.mockk:mockk:1.13.11\") // Para mocking en tests unitarios\r\n    testImplementation(\"org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0\") // Para testear corrutinas\r\n}\r\n
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	(revision ea3f13f5c9134fb7aa3535182511be6dc8313ed5)
++++ b/app/build.gradle.kts	(date 1763266830065)
+@@ -1,12 +1,11 @@
+ plugins {
+     id("com.android.application")
+     id("org.jetbrains.kotlin.android")
+-    // 1. Aplica el plugin KSP que declaramos en el archivo de proyecto
+     id("com.google.devtools.ksp")
+ }
+ 
+ android {
+-    namespace = "cl.duoc.app" // Asegúrate que coincida con tu package name
++    namespace = "cl.duoc.app"
+     compileSdk = 34
+ 
+     defaultConfig {
+@@ -15,77 +14,68 @@
+         targetSdk = 34
+         versionCode = 1
+         versionName = "1.0"
+-
+         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+-        vectorDrawables {
+-            useSupportLibrary = true
+-        }
++        vectorDrawables.useSupportLibrary = true
+     }
+ 
+     buildTypes {
+         release {
+             isMinifyEnabled = false
+-            proguardFiles(
+-                getDefaultProguardFile("proguard-android-optimize.txt"),
+-                "proguard-rules.pro"
+-            )
++            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+         }
+     }
++
+     compileOptions {
+-        sourceCompatibility = JavaVersion.VERSION_1_8
+-        targetCompatibility = JavaVersion.VERSION_1_8
++        sourceCompatibility = JavaVersion.VERSION_17
++        targetCompatibility = JavaVersion.VERSION_17
+     }
+     kotlinOptions {
+-        jvmTarget = "1.8"
++        jvmTarget = "17"
+     }
++
+     buildFeatures {
+         compose = true
+     }
+     composeOptions {
+-        kotlinCompilerExtensionVersion = "1.5.8" // Compatible con Kotlin 1.9.22
++        kotlinCompilerExtensionVersion = "1.5.8"
+     }
+     packaging {
+-        resources {
+-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+-        }
++        resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
+     }
+ }
+ 
+ dependencies {
+     // ---- CORE & UI ----
+     implementation("androidx.core:core-ktx:1.13.1")
+-    implementation("androidx.appcompat:appcompat:1.7.0")
+-    implementation("com.google.android.material:material:1.12.0")
+ 
+-    // ---- LIFECYCLE, VIEWMODEL & COROUTINES (para la arquitectura MVVM) ----
++    // ---- LIFECYCLE, VIEWMODEL & COROUTINES ----
+     val lifecycleVersion = "2.8.3"
+     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion") // Para Compose
++    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
+ 
+-    // ---- COMPOSE (para la UI) ----
++    // ---- COMPOSE ----
+     val composeBom = platform("androidx.compose:compose-bom:2024.06.00")
+     implementation(composeBom)
+     androidTestImplementation(composeBom)
+     implementation("androidx.compose.ui:ui")
+     implementation("androidx.compose.ui:ui-graphics")
+     implementation("androidx.compose.ui:ui-tooling-preview")
+-    implementation("androidx.compose.material3:material3")
++    implementation("androidx.compose.material3:material3") // Este es el Material Design para Compose
+     implementation("androidx.activity:activity-compose:1.9.0")
+     debugImplementation("androidx.compose.ui:ui-tooling")
+     debugImplementation("androidx.compose.ui:ui-test-manifest")
+ 
+-    // ---- ROOM (para la base de datos local) ----
++    // ---- ROOM ----
+     val roomVersion = "2.6.1"
+     implementation("androidx.room:room-runtime:$roomVersion")
+-    implementation("androidx.room:room-ktx:$roomVersion") // Para usar corrutinas con Room
+-    // 2. Usa KSP para el procesador de anotaciones de Room
++    implementation("androidx.room:room-ktx:$roomVersion")
+     ksp("androidx.room:room-compiler:$roomVersion")
+ 
+     // ---- TESTING ----
+     testImplementation("junit:junit:4.13.2")
+     androidTestImplementation("androidx.test.ext:junit:1.2.1")
+     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+-    testImplementation("io.mockk:mockk:1.13.11") // Para mocking en tests unitarios
+-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0") // Para testear corrutinas
++    testImplementation("io.mockk:mockk:1.13.11")
++    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
+ }
+Index: app/src/main/java/cl/duoc/app/model/domain/ActualizarPerfilUseCase.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package cl.duoc.app.model.domain\r\n\r\nimport cl.duoc.app.model.data.entities.UserEntity\r\nimport cl.duoc.app.model.data.repository.UserRepository\r\n\r\n/**\r\n * Use Case para actualizar información del perfil de usuario\r\n */\r\nclass ActualizarPerfilUseCase(private val repository: UserRepository) {\r\n\r\n    suspend operator fun invoke(\r\n        userId: Int,\r\n        nombreCompleto: String,\r\n        telefono: String?,\r\n        fechaNacimiento: String?,\r\n        rut: String?\r\n    ): Result<Unit> {\r\n\r\n        // Validaciones\r\n        if (userId <= 0) {\r\n            return Result.failure(Exception(\"ID de usuario inválido\"))\r\n        }\r\n\r\n        if (nombreCompleto.isBlank()) {\r\n            return Result.failure(Exception(\"El nombre completo es obligatorio\"))\r\n        }\r\n\r\n        // Validar teléfono si se proporciona\r\n        if (!telefono.isNullOrBlank() && !isValidPhoneNumber(telefono)) {\r\n            return Result.failure(Exception(\"Formato de teléfono inválido\"))\r\n        }\r\n\r\n        // Validar RUT chileno si se proporciona\r\n        if (!rut.isNullOrBlank() && !isValidRut(rut)) {\r\n            return Result.failure(Exception(\"RUT inválido\"))\r\n        }\r\n\r\n        // Obtener usuario actual\r\n        val userResult = repository.obtenerUsuarioPorId(userId)\r\n        if (userResult.isFailure) {\r\n            return Result.failure(Exception(\"Usuario no encontrado\"))\r\n        }\r\n\r\n        val currentUser = userResult.getOrNull()!!\r\n\r\n        // Crear usuario actualizado\r\n        val updatedUser = currentUser.copy(\r\n            nombreCompleto = nombreCompleto.trim(),\r\n            telefono = telefono?.trim(),\r\n            fechaNacimiento = fechaNacimiento?.trim(),\r\n            rut = rut?.trim()\r\n        )\r\n\r\n        // Actualizar en el repositorio\r\n        return repository.actualizarUsuario(updatedUser)\r\n    }\r\n\r\n    /**\r\n     * Valida formato de teléfono chileno\r\n     * Acepta: +56912345678, 912345678, +56 9 1234 5678\r\n     */\r\n    private fun isValidPhoneNumber(phone: String): Boolean {\r\n        val cleanPhone = phone.replace(Regex(\"[\\\\s-]\"), \"\")\r\n\r\n        // Patrón para teléfono chileno\r\n        val phoneRegex = \"^(\\\\+?56)?[9][0-9]{8}$\".toRegex()\r\n        return cleanPhone.matches(phoneRegex)\r\n    }\r\n\r\n    /**\r\n     * Valida RUT chileno\r\n     * Acepta: 12.345.678-9, 12345678-9, 123456789\r\n     */\r\n    private fun isValidRut(rut: String): Boolean {\r\n        // Limpiar RUT (remover puntos y guión)\r\n        val cleanRut = rut.replace(Regex(\"[.-]\"), \"\")\r\n\r\n        if (cleanRut.length < 8 || cleanRut.length > 9) {\r\n            return false\r\n        }\r\n\r\n        // Separar número y dígito verificador\r\n        val rutNumber = cleanRut.dropLast(1)\r\n        val dv = cleanRut.last().uppercaseChar()\r\n\r\n        // Validar que el número sea numérico\r\n        if (!rutNumber.all { it.isDigit() }) {\r\n            return false\r\n        }\r\n\r\n        // Calcular dígito verificador\r\n        var sum = 0\r\n        var multiplier = 2\r\n\r\n        for (i in rutNumber.reversed()) {\r\n            sum += i.digitToInt() * multiplier\r\n            multiplier = if (multiplier == 7) 2 else multiplier + 1\r\n        }\r\n\r\n        val calculatedDv = 11 - (sum % 11)\r\n        val expectedDv = when (calculatedDv) {\r\n            11 -> '0'\r\n            10 -> 'K'\r\n            else -> calculatedDv.toString().first()\r\n        }\r\n\r\n        return dv == expectedDv\r\n    }\r\n}
+===================================================================
+diff --git a/app/src/main/java/cl/duoc/app/model/domain/ActualizarPerfilUseCase.kt b/app/src/main/java/cl/duoc/app/model/domain/ActualizarPerfilUseCase.kt
+--- a/app/src/main/java/cl/duoc/app/model/domain/ActualizarPerfilUseCase.kt	(revision ea3f13f5c9134fb7aa3535182511be6dc8313ed5)
++++ b/app/src/main/java/cl/duoc/app/model/domain/ActualizarPerfilUseCase.kt	(date 1763267099216)
+@@ -3,9 +3,6 @@
+ import cl.duoc.app.model.data.entities.UserEntity
+ import cl.duoc.app.model.data.repository.UserRepository
+ 
+-/**
+- * Use Case para actualizar información del perfil de usuario
+- */
+ class ActualizarPerfilUseCase(private val repository: UserRepository) {
+ 
+     suspend operator fun invoke(
+@@ -55,10 +52,6 @@
+         return repository.actualizarUsuario(updatedUser)
+     }
+ 
+-    /**
+-     * Valida formato de teléfono chileno
+-     * Acepta: +56912345678, 912345678, +56 9 1234 5678
+-     */
+     private fun isValidPhoneNumber(phone: String): Boolean {
+         val cleanPhone = phone.replace(Regex("[\\s-]"), "")
+ 
+@@ -67,10 +60,6 @@
+         return cleanPhone.matches(phoneRegex)
+     }
+ 
+-    /**
+-     * Valida RUT chileno
+-     * Acepta: 12.345.678-9, 12345678-9, 123456789
+-     */
+     private fun isValidRut(rut: String): Boolean {
+         // Limpiar RUT (remover puntos y guión)
+         val cleanRut = rut.replace(Regex("[.-]"), "")
+Index: app/src/main/java/cl/duoc/app/viewmodel/LoginViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package cl.duoc.app.viewmodel\r\n\r\nimport androidx.lifecycle.ViewModel\r\nimport androidx.lifecycle.viewModelScope\r\nimport cl.duoc.app.model.data.entities.UserEntity\r\nimport cl.duoc.app.model.domain.LoginUseCase\r\nimport kotlinx.coroutines.flow.MutableStateFlow\r\nimport kotlinx.coroutines.flow.StateFlow\r\nimport kotlinx.coroutines.flow.asStateFlow\r\nimport kotlinx.coroutines.launch\r\n\r\ndata class LoginUiState(\r\n    val email: String = \"\",\r\n    val password: String = \"\",\r\n    val isLoading: Boolean = false,\r\n    val errorMessage: String? = null,\r\n    val loginExitoso: Boolean = false,\r\n    val usuarioLogueado: UserEntity? = null\r\n)\r\n\r\n/**\r\n * ViewModel para la pantalla de Login.\r\n * Recibe sus dependencias (LoginUseCase) en lugar de crearlas.\r\n */\r\nclass LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {\r\n\r\n    private val _uiState = MutableStateFlow(LoginUiState())\r\n    val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()\r\n\r\n    fun onEmailChange(email: String) {\r\n        _uiState.value = _uiState.value.copy(\r\n            email = email,\r\n            errorMessage = null\r\n        )\r\n    }\r\n\r\n    fun onPasswordChange(password: String) {\r\n        _uiState.value = _uiState.value.copy(\r\n            password = password,\r\n            errorMessage = null\r\n        )\r\n    }\r\n\r\n    fun login() {\r\n        val currentState = _uiState.value\r\n\r\n        _uiState.value = currentState.copy(isLoading = true, errorMessage = null)\r\n\r\n        viewModelScope.launch {\r\n            val result = loginUseCase(\r\n                email = currentState.email,\r\n                password = currentState.password\r\n            )\r\n\r\n            result.fold(\r\n                onSuccess = { usuario ->\r\n                    _uiState.value = currentState.copy(\r\n                        isLoading = false,\r\n                        loginExitoso = true,\r\n                        usuarioLogueado = usuario,\r\n                        errorMessage = null\r\n                    )\r\n                },\r\n                onFailure = { exception ->\r\n                    _uiState.value = currentState.copy(\r\n                        isLoading = false,\r\n                        errorMessage = exception.message ?: \"Error al iniciar sesión\"\r\n                    )\r\n                }\r\n            )\r\n        }\r\n    }\r\n\r\n    fun limpiarError() {\r\n        _uiState.value = _uiState.value.copy(errorMessage = null)\r\n    }\r\n\r\n    fun resetLoginExitoso() {\r\n        _uiState.value = _uiState.value.copy(loginExitoso = false)\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/cl/duoc/app/viewmodel/LoginViewModel.kt b/app/src/main/java/cl/duoc/app/viewmodel/LoginViewModel.kt
+--- a/app/src/main/java/cl/duoc/app/viewmodel/LoginViewModel.kt	(revision ea3f13f5c9134fb7aa3535182511be6dc8313ed5)
++++ b/app/src/main/java/cl/duoc/app/viewmodel/LoginViewModel.kt	(date 1763267487272)
+@@ -18,10 +18,6 @@
+     val usuarioLogueado: UserEntity? = null
+ )
+ 
+-/**
+- * ViewModel para la pantalla de Login.
+- * Recibe sus dependencias (LoginUseCase) en lugar de crearlas.
+- */
+ class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
+ 
+     private val _uiState = MutableStateFlow(LoginUiState())
+Index: app/src/main/java/cl/duoc/app/model/domain/CambiarPasswordUseCase.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package cl.duoc.app.model.domain\r\n\r\nimport cl.duoc.app.model.data.repository.UserRepository\r\nimport java.security.MessageDigest\r\n\r\n/**\r\n * Use Case para cambiar la contraseña del usuario\r\n */\r\nclass CambiarPasswordUseCase(private val repository: UserRepository) {\r\n\r\n    suspend operator fun invoke(\r\n        userId: Int,\r\n        passwordActual: String,\r\n        passwordNueva: String,\r\n        passwordNuevaConfirm: String\r\n    ): Result<Unit> {\r\n\r\n        // Validaciones\r\n        if (userId <= 0) {\r\n            return Result.failure(Exception(\"ID de usuario inválido\"))\r\n        }\r\n\r\n        if (passwordActual.isBlank()) {\r\n            return Result.failure(Exception(\"La contraseña actual es obligatoria\"))\r\n        }\r\n\r\n        if (passwordNueva.isBlank()) {\r\n            return Result.failure(Exception(\"La nueva contraseña es obligatoria\"))\r\n        }\r\n\r\n        if (passwordNueva.length < 6) {\r\n            return Result.failure(Exception(\"La nueva contraseña debe tener al menos 6 caracteres\"))\r\n        }\r\n\r\n        if (passwordNueva != passwordNuevaConfirm) {\r\n            return Result.failure(Exception(\"Las contraseñas no coinciden\"))\r\n        }\r\n\r\n        if (passwordActual == passwordNueva) {\r\n            return Result.failure(Exception(\"La nueva contraseña debe ser diferente a la actual\"))\r\n        }\r\n\r\n        // Obtener usuario actual\r\n        val userResult = repository.obtenerUsuarioPorId(userId)\r\n        if (userResult.isFailure) {\r\n            return Result.failure(Exception(\"Usuario no encontrado\"))\r\n        }\r\n\r\n        val currentUser = userResult.getOrNull()!!\r\n\r\n        // Verificar contraseña actual\r\n        val passwordActualEncriptada = encriptarPassword(passwordActual)\r\n        if (currentUser.password != passwordActualEncriptada) {\r\n            return Result.failure(Exception(\"La contraseña actual es incorrecta\"))\r\n        }\r\n\r\n        // Encriptar nueva contraseña\r\n        val passwordNuevaEncriptada = encriptarPassword(passwordNueva)\r\n\r\n        // Actualizar usuario con nueva contraseña\r\n        val updatedUser = currentUser.copy(password = passwordNuevaEncriptada)\r\n\r\n        return repository.actualizarUsuario(updatedUser)\r\n    }\r\n\r\n    private fun encriptarPassword(password: String): String {\r\n        val md = MessageDigest.getInstance(\"SHA-256\")\r\n        val hashBytes = md.digest(password.toByteArray())\r\n        return hashBytes.joinToString(\"\") { \"%02x\".format(it) }\r\n    }\r\n}
+===================================================================
+diff --git a/app/src/main/java/cl/duoc/app/model/domain/CambiarPasswordUseCase.kt b/app/src/main/java/cl/duoc/app/model/domain/CambiarPasswordUseCase.kt
+--- a/app/src/main/java/cl/duoc/app/model/domain/CambiarPasswordUseCase.kt	(revision ea3f13f5c9134fb7aa3535182511be6dc8313ed5)
++++ b/app/src/main/java/cl/duoc/app/model/domain/CambiarPasswordUseCase.kt	(date 1763267487280)
+@@ -3,9 +3,6 @@
+ import cl.duoc.app.model.data.repository.UserRepository
+ import java.security.MessageDigest
+ 
+-/**
+- * Use Case para cambiar la contraseña del usuario
+- */
+ class CambiarPasswordUseCase(private val repository: UserRepository) {
+ 
+     suspend operator fun invoke(
+Index: app/src/main/java/cl/duoc/app/model/domain/ObtenerPerfilUseCase.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package cl.duoc.app.model.domain\r\n\r\nimport cl.duoc.app.model.data.entities.UserEntity\r\nimport cl.duoc.app.model.data.repository.UserRepository\r\n\r\n/**\r\n * Use Case para obtener información del perfil de usuario\r\n */\r\nclass ObtenerPerfilUseCase(private val repository: UserRepository) {\r\n\r\n    suspend operator fun invoke(userId: Int): Result<UserEntity> {\r\n        // Validar ID de usuario\r\n        if (userId <= 0) {\r\n            return Result.failure(Exception(\"ID de usuario inválido\"))\r\n        }\r\n\r\n        // Obtener usuario del repositorio\r\n        return repository.obtenerUsuarioPorId(userId)\r\n    }\r\n}
+===================================================================
+diff --git a/app/src/main/java/cl/duoc/app/model/domain/ObtenerPerfilUseCase.kt b/app/src/main/java/cl/duoc/app/model/domain/ObtenerPerfilUseCase.kt
+--- a/app/src/main/java/cl/duoc/app/model/domain/ObtenerPerfilUseCase.kt	(revision ea3f13f5c9134fb7aa3535182511be6dc8313ed5)
++++ b/app/src/main/java/cl/duoc/app/model/domain/ObtenerPerfilUseCase.kt	(date 1763267487348)
+@@ -3,9 +3,6 @@
+ import cl.duoc.app.model.data.entities.UserEntity
+ import cl.duoc.app.model.data.repository.UserRepository
+ 
+-/**
+- * Use Case para obtener información del perfil de usuario
+- */
+ class ObtenerPerfilUseCase(private val repository: UserRepository) {
+ 
+     suspend operator fun invoke(userId: Int): Result<UserEntity> {
+Index: app/src/main/java/cl/duoc/app/model/domain/RegisterUseCase.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package cl.duoc.app.model.domain\r\n\r\nimport cl.duoc.app.model.data.entities.UserEntity\r\nimport cl.duoc.app.model.repository.UserRepository\r\nimport kotlinx.coroutines.flow.firstOrNull\r\nimport java.security.MessageDigest\r\n\r\n/**\r\n * Caso de Uso para la lógica de negocio del registro de usuario.\r\n * Contiene todas las validaciones y la lógica de creación de la entidad.\r\n */\r\nclass RegisterUseCase(private val userRepository: UserRepository) {\r\n\r\n    suspend operator fun invoke(nombreCompleto: String, email: String, password: String, tipoUsuario: String): Result<Unit> {\r\n        // 1. Validación de campos obligatorios\r\n        if (nombreCompleto.isBlank() || email.isBlank() || password.isBlank()) {\r\n            return Result.failure(Exception(\"Todos los campos son obligatorios\"))\r\n        }\r\n\r\n        // 2. Validación de formato de email\r\n        if (!isValidEmail(email)) {\r\n            return Result.failure(Exception(\"El formato del correo electrónico no es válido\"))\r\n        }\r\n\r\n        // 3. Validación de longitud de contraseña (Criterio HU-01)\r\n        if (password.length < 6) {\r\n            return Result.failure(Exception(\"La contraseña debe tener al menos 6 caracteres\"))\r\n        }\r\n\r\n        // 4. Comprobar si el usuario ya existe en la base de datos\r\n        val existingUser = userRepository.findUserByEmail(email).firstOrNull()\r\n        if (existingUser != null) {\r\n            return Result.failure(Exception(\"El correo electrónico ya está registrado\"))\r\n        }\r\n\r\n        // 5. Encriptar la contraseña (¡Buena práctica!)\r\n        val encryptedPassword = encryptPassword(password)\r\n\r\n        // Si todas las validaciones pasan, se crea y se inserta el usuario\r\n        val newUser = UserEntity(\r\n            nombreCompleto = nombreCompleto.trim(),\r\n            email = email.trim().lowercase(),\r\n            password = encryptedPassword,\r\n            tipoUsuario = tipoUsuario\r\n            // Los demás campos como 'rut', 'telefono', etc., se pueden añadir aquí si es necesario\r\n        )\r\n\r\n        return try {\r\n            userRepository.registerUser(newUser)\r\n            Result.success(Unit)\r\n        } catch (e: Exception) {\r\n            Result.failure(e)\r\n        }\r\n    }\r\n\r\n    private fun isValidEmail(email: String): Boolean {\r\n        val emailRegex = \"^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,}$\".toRegex()\r\n        return email.matches(emailRegex)\r\n    }\r\n\r\n    private fun encryptPassword(password: String): String {\r\n        val md = MessageDigest.getInstance(\"SHA-256\")\r\n        val hashBytes = md.digest(password.toByteArray())\r\n        return hashBytes.joinToString(\"\") { \"%02x\".format(it) }\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/cl/duoc/app/model/domain/RegisterUseCase.kt b/app/src/main/java/cl/duoc/app/model/domain/RegisterUseCase.kt
+--- a/app/src/main/java/cl/duoc/app/model/domain/RegisterUseCase.kt	(revision ea3f13f5c9134fb7aa3535182511be6dc8313ed5)
++++ b/app/src/main/java/cl/duoc/app/model/domain/RegisterUseCase.kt	(date 1763267487290)
+@@ -5,10 +5,6 @@
+ import kotlinx.coroutines.flow.firstOrNull
+ import java.security.MessageDigest
+ 
+-/**
+- * Caso de Uso para la lógica de negocio del registro de usuario.
+- * Contiene todas las validaciones y la lógica de creación de la entidad.
+- */
+ class RegisterUseCase(private val userRepository: UserRepository) {
+ 
+     suspend operator fun invoke(nombreCompleto: String, email: String, password: String, tipoUsuario: String): Result<Unit> {
