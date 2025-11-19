@@ -1,86 +1,50 @@
 package cl.duoc.app.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import cl.duoc.app.model.domain.RegisterUseCase // ¡CAMBIO! Ahora usamos el UseCase consolidado
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import cl.duoc.app.domain.validation.FormValidator
+import cl.duoc.app.model.domain.RegisterUseCase
 import kotlinx.coroutines.launch
 
-// El data class RegisterUiState no necesita cambios
-data class RegisterUiState(
-    val nombreCompleto: String = "",
-    val email: String = "",
-    val password: String = "",
-    val confirmPassword: String = "",
-    val tipoUsuario: String = "PACIENTE",
-    val isLoading: Boolean = false,
-    val errorMessage: String? = null,
-    val registroExitoso: Boolean = false
-)
+class RegisterViewModel(
+    private val registerUseCase: RegisterUseCase
+) : ViewModel() {
 
-class RegisterViewModel(private val registerUseCase: RegisterUseCase) : ViewModel() { // ¡CAMBIO! Se recibe el UseCase correcto
+    var name by mutableStateOf("")
+    var email by mutableStateOf("")
+    var password by mutableStateOf("")
 
-    private val _uiState = MutableStateFlow(RegisterUiState())
-    val uiState: StateFlow<RegisterUiState> = _uiState.asStateFlow()
+    var nameError by mutableStateOf<String?>(null)
+    var emailError by mutableStateOf<String?>(null)
+    var passwordError by mutableStateOf<String?>(null)
 
-    // ... (el resto del ViewModel no necesita cambios, ya que la firma del `invoke` es la misma)
+    fun registrar(
+        onSuccess: () -> Unit,
+        onErrorGeneral: (String) -> Unit
+    ) {
+        // 1. Validaciones locales
+        val nameResult = FormValidator.validateName(name)
+        val emailResult = FormValidator.validateEmail(email)
+        val passwordResult = FormValidator.validatePassword(password)
 
-    fun onNombreChange(nombre: String) {
-        _uiState.value = _uiState.value.copy(nombreCompleto = nombre, errorMessage = null)
-    }
+        nameError = nameResult.errorMessage
+        emailError = emailResult.errorMessage
+        passwordError = passwordResult.errorMessage
 
-    fun onEmailChange(email: String) {
-        _uiState.value = _uiState.value.copy(email = email, errorMessage = null)
-    }
-
-    fun onPasswordChange(password: String) {
-        _uiState.value = _uiState.value.copy(password = password, errorMessage = null)
-    }
-
-    fun onConfirmPasswordChange(confirmPassword: String) {
-        _uiState.value = _uiState.value.copy(confirmPassword = confirmPassword, errorMessage = null)
-    }
-
-    fun onTipoUsuarioChange(tipo: String) {
-        _uiState.value = _uiState.value.copy(tipoUsuario = tipo, errorMessage = null)
-    }
-
-    fun registrarUsuario() {
-        val currentState = _uiState.value
-
-        if (currentState.password != currentState.confirmPassword) {
-            _uiState.value = currentState.copy(errorMessage = "Las contraseñas no coinciden")
+        // Si alguna validación falla, no continuamos
+        if (!nameResult.isValid || !emailResult.isValid || !passwordResult.isValid) {
+            onErrorGeneral("Por favor corrija los errores del formulario")
             return
         }
 
-        _uiState.value = currentState.copy(isLoading = true, errorMessage = null)
-
+        // 2. Si todo OK, llamamos al caso de uso
         viewModelScope.launch {
-            val result = registerUseCase(
-                nombreCompleto = currentState.nombreCompleto,
-                email = currentState.email,
-                password = currentState.password,
-                tipoUsuario = currentState.tipoUsuario
-            )
-
-            result.fold(
-                onSuccess = {
-                    _uiState.value = currentState.copy(isLoading = false, registroExitoso = true, errorMessage = null)
-                },
-                onFailure = { exception ->
-                    _uiState.value = currentState.copy(isLoading = false, errorMessage = exception.message ?: "Error desconocido")
-                }
-            )
+            registerUseCase(name.trim(), email.trim(), password, "PACIENTE")
+                .onSuccess { onSuccess() }
+                .onFailure { e -> onErrorGeneral(e.message ?: "Error al registrar") }
         }
-    }
-
-    fun limpiarError() {
-        _uiState.value = _uiState.value.copy(errorMessage = null)
-    }
-
-    fun resetRegistroExitoso() {
-        _uiState.value = _uiState.value.copy(registroExitoso = false)
     }
 }
