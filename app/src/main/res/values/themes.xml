@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MedicalConsulta" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/medical_primary</item>
+        <item name="colorPrimaryDark">@color/medical_primary_dark</item>
+        <item name="colorAccent">@color/medical_accent</item>
+        <item name="android:windowBackground">@color/medical_background</item>
+    </style>
+</resources>

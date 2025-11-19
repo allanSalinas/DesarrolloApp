@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Medical Consulta</string>
+
+    <!-- Login -->
+    <string name="login_title">Medical Consulta</string>
+    <string name="login_subtitle">Sistema de Gestión de Citas Médicas</string>
+    <string name="login_username">Usuario</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_button">Iniciar Sesión</string>
+    <string name="login_credentials">Usuario: admin | Contraseña: admin</string>
+
+    <!-- Menu -->
+    <string name="menu_inicio">Inicio</string>
+    <string name="menu_profesionales">Profesionales</string>
+    <string name="menu_agendar">Agendar Cita</string>
+    <string name="menu_historial">Historial de Citas</string>
+
+    <!-- Start -->
+    <string name="start_welcome">Bienvenido a Medical Consulta</string>
+    <string name="start_description">Sistema de gestión de citas médicas. Use el menú ☰ para navegar.</string>
+
+    <!-- Profesionales -->
+    <string name="profesionales_title">Profesionales Disponibles</string>
+    <string name="profesionales_count">%1$d profesionales disponibles</string>
+    <string name="profesionales_empty">No hay profesionales disponibles</string>
+
+    <!-- Agendar Cita -->
+    <string name="agendar_title">Agendar Cita Médica</string>
+    <string name="agendar_datos_paciente">Datos del Paciente</string>
+    <string name="agendar_nombre">Nombre completo</string>
+    <string name="agendar_rut">RUT (sin puntos, con guión)</string>
+    <string name="agendar_seleccionar_profesional">Seleccionar Profesional</string>
+    <string name="agendar_fecha_hora">Fecha y Hora</string>
+    <string name="agendar_fecha">Fecha (dd/mm/yyyy)</string>
+    <string name="agendar_hora">Hora (HH:MM)</string>
+    <string name="agendar_motivo">Motivo de consulta</string>
+    <string name="agendar_button">Agendar Cita</string>
+    <string name="agendar_exito">Cita agendada exitosamente</string>
+
+    <!-- Historial -->
+    <string name="historial_title">Historial de Citas</string>
+    <string name="historial_count">%1$d citas registradas</string>
+    <string name="historial_empty">No hay citas registradas</string>
+    <string name="historial_paciente">Paciente:</string>
+    <string name="historial_rut">RUT:</string>
+    <string name="historial_profesional">Profesional:</string>
+    <string name="historial_especialidad">Especialidad:</string>
+    <string name="historial_fecha">Fecha:</string>
+    <string name="historial_hora">Hora:</string>
+    <string name="historial_motivo">Motivo:</string>
+
+    <!-- Errores -->
+    <string name="error_campo_obligatorio">Este campo es obligatorio</string>
+    <string name="error_formato_invalido">Formato inválido</string>
+</resources>
