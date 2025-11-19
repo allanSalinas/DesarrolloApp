@@ -117,10 +117,10 @@
     &quot;assignee&quot;: &quot;dief-ysis&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/allanSalinas/DesarrolloApp&quot;,
-    &quot;accountId&quot;: &quot;67f1cfc9-0df2-4329-a463-894c73b27784&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/allanSalinas/DesarrolloApp.git",
+    "accountId": "edb91de7-c489-45e0-a7af-11866098573f"
   }
 }</component>
   <component name="ProblemsViewState">
