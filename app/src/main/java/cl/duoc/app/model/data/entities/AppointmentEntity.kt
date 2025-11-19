@@ -7,10 +7,10 @@ import androidx.room.PrimaryKey
 data class AppointmentEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-
     val userId: Int,
+    val professionalId: Int,   // 👈 NUEVO
     val professional: String,
-    val date: Long,         // fecha en millis
-    val time: String,       // "10:30"
-    val status: String = "Programada"   // 👈 NUEVO
+    val date: Long,
+    val time: String,
+    val status: String = "Programada"
 )

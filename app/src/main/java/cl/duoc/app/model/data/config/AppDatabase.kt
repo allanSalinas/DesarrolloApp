@@ -15,16 +15,16 @@ import cl.duoc.app.model.data.entities.UserEntity
     entities = [
         UserEntity::class,
         AppointmentEntity::class,
-        ProfessionalEntity::class  // 👈 AGREGADO
+        ProfessionalEntity::class
     ],
-    version = 3, // 👈 VERSIÓN INCREMENTADA
+    version = 4, // 👈 VERSIÓN INCREMENTADA A 4
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
     abstract fun appointmentDao(): AppointmentDao
-    abstract fun professionalDao(): ProfessionalDao  // 👈 NUEVO
+    abstract fun professionalDao(): ProfessionalDao
 
     companion object {
         @Volatile
@@ -37,7 +37,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "desarrollo_app_database"
                 )
-                    .fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigration() // NOTA: Usar con cuidado en producción
                     .build()
                 INSTANCE = instance
                 instance
