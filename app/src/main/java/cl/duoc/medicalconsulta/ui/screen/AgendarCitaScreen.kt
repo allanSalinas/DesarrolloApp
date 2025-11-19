@@ -18,7 +18,7 @@ import cl.duoc.medicalconsulta.viewmodel.CitaViewModel
 import cl.duoc.medicalconsulta.viewmodel.CitaViewModelFactory
 
 @Composable
-fun AgendarCitaScreen() {
+fun AgendarCitaScreen(citaId: Long = 0L) {
     val context = LocalContext.current
     val viewModel: CitaViewModel = viewModel(
         factory = CitaViewModelFactory(context.applicationContext as Application)
@@ -27,6 +27,17 @@ fun AgendarCitaScreen() {
     val estado by viewModel.estado.collectAsState()
     val profesionales by viewModel.profesionales.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
+
+    val isEditMode = citaId != 0L
+
+    // NUEVA LÓGICA: Cargar la cita si estamos en modo edición (solo al inicio)
+    LaunchedEffect(citaId) {
+        if (isEditMode) {
+            viewModel.cargarCitaParaEdicion(citaId)
+        } else {
+            viewModel.resetEstado() // Asegurarse de que el formulario esté limpio si es nueva cita
+        }
+    }
 
     // Mostrar mensaje de éxito
     LaunchedEffect(estado.guardadoExitoso) {
@@ -50,7 +61,7 @@ fun AgendarCitaScreen() {
         ) {
             item {
                 Text(
-                    text = "Agendar Cita Médica",
+                    text = if (isEditMode) "Editar Cita Médica" else "Agendar Cita Médica",
                     style = MaterialTheme.typography.titleLarge.copy(
                         fontWeight = FontWeight.Bold
                     )
@@ -163,11 +174,12 @@ fun AgendarCitaScreen() {
                 Spacer(Modifier.height(8.dp))
 
                 Button(
-                    onClick = viewModel::onAgendarCita,
+                    onClick = viewModel::onAgendarCitaOActualizarCita, // CORREGIDO: Nombre correcto de la función
                     modifier = Modifier.fillMaxWidth(),
                     enabled = !estado.errores.tieneErrores()
                 ) {
-                    Text("Agendar Cita")
+                    // TEXTO DEL BOTÓN MODIFICADO
+                    Text(if (isEditMode) "Actualizar Cita" else "Agendar Cita")
                 }
             }
         }

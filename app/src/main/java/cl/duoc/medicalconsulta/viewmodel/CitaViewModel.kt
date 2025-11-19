@@ -28,6 +28,8 @@ class CitaViewModel(
     private val _historialCitas = MutableStateFlow<List<CitaEntity>>(emptyList())
     val historialCitas: StateFlow<List<CitaEntity>> = _historialCitas.asStateFlow()
 
+    private val _citaIdEdicion = MutableStateFlow<Long?>(null)
+
     init {
         cargarProfesionales()
         cargarHistorialCitas()
@@ -136,8 +138,9 @@ class CitaViewModel(
         }
     }
 
-    fun onAgendarCita() {
+    fun onAgendarCitaOActualizarCita() {
         val ui = _estado.value
+        val idEdicion = _citaIdEdicion.value
 
         // Validar todos los campos
         val errores = CitaErrores(
@@ -174,6 +177,8 @@ class CitaViewModel(
         viewModelScope.launch {
             val profesional = ui.profesionalSeleccionado!!
             val entity = CitaEntity(
+                // Si estamos en edición, usamos el ID existente; sino, Room genera uno (0)
+                id = idEdicion ?: 0,
                 pacienteNombre = ui.pacienteNombre,
                 pacienteRut = ui.pacienteRut,
                 profesionalId = profesional.id,
@@ -184,17 +189,63 @@ class CitaViewModel(
                 motivoConsulta = ui.motivoConsulta
             )
 
-            citaRepository.guardarCita(entity)
-
-            // Resetear formulario y mostrar éxito
-            _estado.update {
-                CitaUIState(guardadoExitoso = true)
+            if (idEdicion != null) {
+                // Actualizar (Update)
+                citaRepository.actualizarCita(entity)
+            } else {
+                // Crear (Create)
+                citaRepository.guardarCita(entity)
             }
+
+            // Resetear el estado (solo si es Create, o si la UI lo requiere)
+            resetEstado()
+            _estado.update { it.copy(
+                guardadoExitoso = true
+            ) }
 
             // Después de 2 segundos, quitar el mensaje de éxito
             kotlinx.coroutines.delay(2000)
             _estado.update { it.copy(guardadoExitoso = false) }
         }
+    }
+
+    fun cargarCitaParaEdicion(id: Long) {
+        viewModelScope.launch {
+            val entity = citaRepository.obtenerCitaPorId(id)
+            entity?.let {
+                val profesional = Profesional(
+                    id = it.profesionalId,
+                    nombre = it.profesionalNombre,
+                    especialidad = it.especialidad,
+                    disponible = true // Asumimos que sigue disponible para la edición
+                )
+                _estado.update { actual ->
+                    actual.copy(
+                        pacienteNombre = it.pacienteNombre,
+                        pacienteRut = it.pacienteRut,
+                        profesionalSeleccionado = profesional,
+                        fecha = it.fecha,
+                        hora = it.hora,
+                        motivoConsulta = it.motivoConsulta,
+                        errores = CitaErrores(),
+                        guardadoExitoso = false // Resetear
+                    )
+                }
+                _citaIdEdicion.value = id // Establecer el ID en modo edición
+            }
+        }
+    }
+
+    fun onEliminarCita(id: Long) {
+        viewModelScope.launch {
+            citaRepository.eliminarCita(id)
+            // No necesita actualizar _historialCitas, ya que el Flow lo hará automáticamente.
+        }
+    }
+
+    fun resetEstado() {
+        _estado.update { CitaUIState() }
+        _citaIdEdicion.value = null
     }
 
     companion object {

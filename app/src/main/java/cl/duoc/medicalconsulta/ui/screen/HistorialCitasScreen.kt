@@ -21,7 +21,7 @@ import cl.duoc.medicalconsulta.viewmodel.CitaViewModel
 import cl.duoc.medicalconsulta.viewmodel.CitaViewModelFactory
 
 @Composable
-fun HistorialCitasScreen() {
+fun HistorialCitasScreen(onNavigateToEdit: (Long) -> Unit) {
     val context = LocalContext.current
     val viewModel: CitaViewModel = viewModel(
         factory = CitaViewModelFactory(context.applicationContext as Application)
@@ -78,7 +78,11 @@ fun HistorialCitasScreen() {
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 items(citas) { cita ->
-                    CitaCard(cita = cita)
+                    CitaCard(
+                        cita = cita,
+                        onEditClick = { onNavigateToEdit(cita.id) }, // Llamada al NavController
+                        onDeleteClick = { viewModel.onEliminarCita(cita.id) } // Llamada directa al VM
+                    )
                 }
             }
         }
@@ -86,7 +90,10 @@ fun HistorialCitasScreen() {
 }
 
 @Composable
-private fun CitaCard(cita: CitaEntity) {
+private fun CitaCard(
+    cita: CitaEntity,
+    onEditClick: () -> Unit,
+    onDeleteClick: () -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
@@ -114,7 +121,7 @@ private fun CitaCard(cita: CitaEntity) {
                 )
             }
 
-            Divider()
+            HorizontalDivider()
 
             InfoRow(label = "RUT:", value = cita.pacienteRut)
             InfoRow(label = "Profesional:", value = cita.profesionalNombre)
@@ -123,7 +130,7 @@ private fun CitaCard(cita: CitaEntity) {
             InfoRow(label = "Hora:", value = cita.hora)
 
             if (cita.motivoConsulta.isNotBlank()) {
-                Divider(modifier = Modifier.padding(vertical = 4.dp))
+                HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
                 Text(
                     text = "Motivo:",
                     style = MaterialTheme.typography.bodySmall,
@@ -135,6 +142,27 @@ private fun CitaCard(cita: CitaEntity) {
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp),
+                horizontalArrangement = Arrangement.End
+            ) {
+                // Botón Editar
+                TextButton(onClick = onEditClick) {
+                    Text("Editar")
+                }
+                Spacer(Modifier.width(8.dp))
+                // Botón Eliminar
+                TextButton(
+                    onClick = onDeleteClick, colors = ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colorScheme.error
+                    )
+                ) {
+                    Text("Eliminar")
+                }
+            }    
         }
     }
 }
@@ -161,5 +189,5 @@ private fun InfoRow(label: String, value: String) {
 @Preview(showBackground = true)
 @Composable
 private fun HistorialCitasScreenPreview() {
-    HistorialCitasScreen()
+    HistorialCitasScreen(onNavigateToEdit = {})
 }

@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import cl.duoc.medicalconsulta.model.data.entities.CitaEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -12,6 +13,9 @@ interface CitaDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCita(cita: CitaEntity): Long
+
+    @Update
+    suspend fun updateCita(cita: CitaEntity)
 
     @Query("SELECT * FROM citas ORDER BY timestamp DESC")
     fun getAllCitas(): Flow<List<CitaEntity>>

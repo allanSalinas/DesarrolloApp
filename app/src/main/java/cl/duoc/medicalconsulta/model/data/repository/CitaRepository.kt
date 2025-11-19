@@ -15,6 +15,9 @@ class CitaRepository(private val dao: CitaDao) {
     suspend fun guardarCita(cita: CitaEntity): Long =
         dao.insertCita(cita)
 
+    suspend fun actualizarCita(cita: CitaEntity) =
+        dao.updateCita(cita)
+
     suspend fun eliminarCita(id: Long) =
         dao.deleteCita(id)
 

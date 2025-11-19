@@ -7,7 +7,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavType
 import androidx.navigation.compose.*
+import androidx.navigation.navArgument
 import cl.duoc.medicalconsulta.ui.screen.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -19,6 +21,9 @@ object Routes {
     const val AgendarCita = "agendar_cita"
     const val Historial = "historial"
 }
+
+const val CITA_ID_KEY = "citaId"
+const val RUTA_AGENDAR_EDITAR = "${Routes.AgendarCita}?$CITA_ID_KEY={$CITA_ID_KEY}"
 
 @Composable
 fun AppNav() {
@@ -63,14 +68,29 @@ fun AppNav() {
                 }
             }
 
-            composable(Routes.AgendarCita) {
+            // Ruta para Agendar Cita (con o sin ID)
+            // Al usar defaultValue, esta ruta maneja tanto "agendar_cita" como "agendar_cita?citaId=X"
+            composable(
+                route = RUTA_AGENDAR_EDITAR,
+                arguments = listOf(navArgument(CITA_ID_KEY) {
+                    defaultValue = 0L // 0L indica que no hay ID de edición
+                    type = NavType.LongType
+                })
+            ) { backStackEntry ->
+                val citaId = backStackEntry.arguments?.getLong(CITA_ID_KEY) ?: 0L
                 DrawerScaffold(
                     currentRoute = Routes.AgendarCita,
-                    onNavigate = { nav.navigate(it) },
+                    onNavigate = { route -> 
+                        // Si navegan a Agendar Cita desde el menú, limpiamos el backstack o vamos a la ruta base
+                        nav.navigate(route) {
+                            launchSingleTop = true
+                        }
+                    },
                     drawerState = drawerState,
                     scope = scope
                 ) {
-                    AgendarCitaScreen()
+                    // Pasamos el ID a la pantalla
+                    AgendarCitaScreen(citaId = citaId)
                 }
             }
 
@@ -81,7 +101,11 @@ fun AppNav() {
                     drawerState = drawerState,
                     scope = scope
                 ) {
-                    HistorialCitasScreen()
+                    HistorialCitasScreen(
+                        onNavigateToEdit = { id ->
+                            nav.navigate("${Routes.AgendarCita}?$CITA_ID_KEY=$id")
+                        }
+                    )
                 }
             }
         }
@@ -113,7 +137,7 @@ private fun DrawerScaffold(
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(16.dp)
                 )
-                Divider(modifier = Modifier.padding(vertical = 8.dp))
+                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
                 destinations.forEach { item ->
                     NavigationDrawerItem(
@@ -133,7 +157,7 @@ private fun DrawerScaffold(
     ) {
         Scaffold(
             topBar = {
-                SmallTopAppBar(
+                TopAppBar(
                     title = { Text(appBarTitle(currentRoute)) },
                     navigationIcon = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
