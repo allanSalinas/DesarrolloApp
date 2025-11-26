@@ -34,7 +34,6 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Logo o Título
             Text(
                 text = "Medical Consulta",
                 style = MaterialTheme.typography.headlineLarge.copy(
@@ -51,7 +50,6 @@ fun LoginScreen(
 
             Spacer(Modifier.height(24.dp))
 
-            // Usuario
             InputText(
                 valor = estado.username,
                 error = null,
@@ -59,7 +57,6 @@ fun LoginScreen(
                 onChange = viewModel::onUsernameChange
             )
 
-            // Contraseña
             OutlinedTextField(
                 value = estado.password,
                 onValueChange = viewModel::onPasswordChange,
@@ -91,7 +88,6 @@ fun LoginScreen(
             ) {
                 Text("Iniciar Sesión")
             }
-            // Credenciales de prueba
             Spacer(Modifier.height(16.dp))
             Text(
                 text = "Usuario: admin | Contraseña: admin",

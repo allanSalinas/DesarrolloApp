@@ -36,7 +36,6 @@ fun StartScreen() {
 
         Spacer(Modifier.height(16.dp))
 
-        // Tarjetas de acceso rápido
         QuickAccessCard(
             icon = Icons.Default.People,
             title = "Ver Profesionales",

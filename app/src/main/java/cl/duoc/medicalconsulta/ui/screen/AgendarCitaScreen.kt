@@ -30,16 +30,14 @@ fun AgendarCitaScreen(citaId: Long = 0L) {
 
     val isEditMode = citaId != 0L
 
-    // NUEVA LÓGICA: Cargar la cita si estamos en modo edición (solo al inicio)
     LaunchedEffect(citaId) {
         if (isEditMode) {
             viewModel.cargarCitaParaEdicion(citaId)
         } else {
-            viewModel.resetEstado() // Asegurarse de que el formulario esté limpio si es nueva cita
+            viewModel.resetEstado()
         }
     }
 
-    // Mostrar mensaje de éxito
     LaunchedEffect(estado.guardadoExitoso) {
         if (estado.guardadoExitoso) {
             snackbarHostState.showSnackbar(
@@ -68,7 +66,6 @@ fun AgendarCitaScreen(citaId: Long = 0L) {
                 )
             }
 
-            // Datos del Paciente
             item {
                 Text(
                     text = "Datos del Paciente",
@@ -97,7 +94,6 @@ fun AgendarCitaScreen(citaId: Long = 0L) {
                 )
             }
 
-            // Selección de Profesional
             item {
                 Text(
                     text = "Seleccionar Profesional",
@@ -125,7 +121,6 @@ fun AgendarCitaScreen(citaId: Long = 0L) {
                 )
             }
 
-            // Fecha y Hora
             item {
                 Text(
                     text = "Fecha y Hora",

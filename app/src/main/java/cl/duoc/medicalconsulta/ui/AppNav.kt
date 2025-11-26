@@ -68,7 +68,6 @@ fun AppNav() {
                 }
             }
 
-            // Ruta para Agendar Cita (con o sin ID)
             // Al usar defaultValue, esta ruta maneja tanto "agendar_cita" como "agendar_cita?citaId=X"
             composable(
                 route = RUTA_AGENDAR_EDITAR,
