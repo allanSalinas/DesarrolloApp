@@ -31,22 +31,16 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="537ffe19-1c35-4d9a-a610-6087b33db494" name="Changes" comment="readme">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/checksums/checksums.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/checksums/md5-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/checksums/sha1-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/gc.properties" beforeDir="false" />
+    <list default="true" id="537ffe19-1c35-4d9a-a610-6087b33db494" name="Changes" comment=".">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/config/AppDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/config/AppDatabase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/repository/CitaRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/repository/CitaRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/repository/ProfesionalRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/repository/ProfesionalRepository.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/AppNav.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/AppNav.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/screen/AgendarCitaScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/screen/AgendarCitaScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/screen/LoginScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/screen/LoginScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/screen/StartScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/screen/StartScreen.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +64,7 @@
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="DesarrolloApp" type="f1a62948:ProjectNode" />
+                <item name="MedicalConsulta" type="f1a62948:ProjectNode" />
               </path>
             </expand>
             <select />
@@ -320,7 +314,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763566891520</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary=".">
+      <option name="closed" value="true" />
+      <created>1764195948567</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1764195948567</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -341,11 +343,11 @@
     <MESSAGE value="feat(ui): diseñar pantallas de autenticación&#10;&#10;- Crear StartScreen como pantalla inicial&#10;- Implementar LoginScreen con validaciones&#10;- Diseñar RegisterScreen con Material 3&#10;- Agregar selector de tipo de usuario&#10;- Mostrar mensajes de error y loading states&#10;&#10;Closes #HU-01 #HU-02" />
     <MESSAGE value="feat(app): integrar navegación en MainActivity&#10;&#10;- Configurar AppNav como punto de entrada&#10;- Habilitar edge-to-edge display&#10;- Aplicar tema de la aplicación&#10;&#10;Refs #HU-01" />
     <MESSAGE value="test(register): agregar pruebas unitarias&#10;&#10;- Test de validación de nombre obligatorio&#10;- Test de email inválido&#10;- Test de contraseña corta&#10;- Test de email duplicado&#10;- Test de registro exitoso&#10;- Test de encriptación de contraseña&#10;&#10;Refs #HU-01" />
-    <MESSAGE value="." />
     <MESSAGE value="proyecto funcionando" />
     <MESSAGE value="crud completado" />
     <MESSAGE value="readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="readme" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">

@@ -20,6 +20,7 @@ object Routes {
     const val Profesionales = "profesionales"
     const val AgendarCita = "agendar_cita"
     const val Historial = "historial"
+    const val BuscarMedicamentos = "buscar_medicamentos"
 }
 
 const val CITA_ID_KEY = "citaId"
@@ -107,6 +108,17 @@ fun AppNav() {
                     )
                 }
             }
+
+            composable(Routes.BuscarMedicamentos) {
+                DrawerScaffold(
+                    currentRoute = Routes.BuscarMedicamentos,
+                    onNavigate = { nav.navigate(it) },
+                    drawerState = drawerState,
+                    scope = scope
+                ) {
+                    BuscarMedicamentosScreen()
+                }
+            }
         }
     }
 }
@@ -124,7 +136,8 @@ private fun DrawerScaffold(
         DrawerItem("Inicio", Routes.Start),
         DrawerItem("Profesionales", Routes.Profesionales),
         DrawerItem("Agendar Cita", Routes.AgendarCita),
-        DrawerItem("Historial de Citas", Routes.Historial)
+        DrawerItem("Historial de Citas", Routes.Historial),
+        DrawerItem("Buscar Medicamentos", Routes.BuscarMedicamentos)
     )
 
     ModalNavigationDrawer(
@@ -181,5 +194,6 @@ private fun appBarTitle(route: String?): String = when (route) {
     Routes.Profesionales -> "Profesionales Disponibles"
     Routes.AgendarCita -> "Agendar Cita Médica"
     Routes.Historial -> "Historial de Citas"
+    Routes.BuscarMedicamentos -> "Buscar Medicamentos"
     else -> "Medical Consulta"
 }
