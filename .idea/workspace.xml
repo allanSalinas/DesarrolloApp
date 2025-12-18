@@ -31,16 +31,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="537ffe19-1c35-4d9a-a610-6087b33db494" name="Changes" comment=".">
+    <list default="true" id="537ffe19-1c35-4d9a-a610-6087b33db494" name="Changes" comment="integracion de api">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/config/AppDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/config/AppDatabase.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/repository/CitaRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/repository/CitaRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/repository/ProfesionalRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/repository/ProfesionalRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/AppNav.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/AppNav.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -322,7 +317,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764195948567</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="integracion de api">
+      <option name="closed" value="true" />
+      <created>1764994685019</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1764994685019</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -347,7 +350,8 @@
     <MESSAGE value="crud completado" />
     <MESSAGE value="readme" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="integracion de api" />
+    <option name="LAST_COMMIT_MESSAGE" value="integracion de api" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
@@ -364,12 +368,12 @@
         </entry>
         <entry key="cl.duoc.medicalconsulta">
           <value>
-            <CheckInfo lastCheckTimestamp="1763549536339" />
+            <CheckInfo lastCheckTimestamp="1764994563790" />
           </value>
         </entry>
         <entry key="cl.duoc.medicalconsulta.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1763549536340" />
+            <CheckInfo lastCheckTimestamp="1764994563794" />
           </value>
         </entry>
       </map>
