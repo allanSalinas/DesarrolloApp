@@ -128,4 +128,7 @@ dependencies {
 
     // Gson para JSON
     implementation("com.google.code.gson:gson:2.10.1")
+
+    // Coil para carga de imágenes en Compose
+    implementation("io.coil-kt:coil-compose:2.5.0")
 }

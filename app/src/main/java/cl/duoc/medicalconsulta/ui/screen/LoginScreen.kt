@@ -18,7 +18,9 @@ import cl.duoc.medicalconsulta.viewmodel.LoginViewModel
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = viewModel(),
-    onAuthenticated: () -> Unit
+    onAuthenticated: (cl.duoc.medicalconsulta.model.domain.Usuario) -> Unit,
+    onNavigateToRegistro: () -> Unit = {},
+    onNavigateToRecuperar: () -> Unit = {}
 ) {
     val estado by viewModel.estado.collectAsState()
     var pwVisible by remember { mutableStateOf(false) }
@@ -80,20 +82,48 @@ fun LoginScreen(
                 }
             )
 
+            // Enlace a recuperar contraseña
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
+            ) {
+                TextButton(onClick = onNavigateToRecuperar) {
+                    Text("¿Olvidaste tu contraseña?")
+                }
+            }
+
             Spacer(Modifier.height(8.dp))
 
             Button(
                 onClick = { viewModel.autenticar(onAuthenticated) },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                enabled = !estado.cargando
             ) {
-                Text("Iniciar Sesión")
+                if (estado.cargando) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(24.dp),
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                } else {
+                    Text("Iniciar Sesión")
+                }
             }
-            Spacer(Modifier.height(16.dp))
-            Text(
-                text = "Usuario: admin | Contraseña: admin",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+
+            Spacer(Modifier.height(8.dp))
+
+            // Enlace a registro
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "¿No tienes cuenta?",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Spacer(Modifier.width(4.dp))
+                TextButton(onClick = onNavigateToRegistro) {
+                    Text("Regístrate aquí")
+                }
+            }
         }
     }
 }

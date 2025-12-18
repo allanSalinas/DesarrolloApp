@@ -31,11 +31,39 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="537ffe19-1c35-4d9a-a610-6087b33db494" name="Changes" comment="integracion de api">
+    <list default="true" id="537ffe19-1c35-4d9a-a610-6087b33db494" name="Changes" comment="gestion de usuario y roles">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/dao/UsuarioDao.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/entities/UsuarioEntity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/repository/UsuarioRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/domain/Rol.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/domain/Usuario.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/domain/UsuarioUIState.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/network/api/UsuarioApiService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/network/dto/LoginRequest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/network/dto/LoginResponse.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/network/dto/RecuperacionRequest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/network/dto/UsuarioDto.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/screen/PerfilScreen.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/screen/RecuperarPasswordScreen.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/screen/RegistroScreen.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/utils/CameraHelper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/utils/NotificationHelper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/utils/NotificationReceiver.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/viewmodel/UsuarioViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_notification.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/file_paths.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/java/cl/duoc/medicalconsulta/viewmodel/CitaViewModelTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/java/cl/duoc/medicalconsulta/viewmodel/UsuarioViewModelTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/config/AppDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/data/config/AppDatabase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/domain/LoginUIState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/model/domain/LoginUIState.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/AppNav.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/AppNav.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/screen/LoginScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/ui/screen/LoginScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/viewmodel/LoginViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cl/duoc/medicalconsulta/viewmodel/LoginViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +125,7 @@
 }</component>
   <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="C:\Users\david\.gradle\wrapper\dists\gradle-8.13-bin\5xuhj0ry160q40clulazy9h7d\gradle-8.13" javaHome="C:\Users\david\.jdks\ms-21.0.9" gradleVersion="8.13" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -113,35 +141,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;PROJECT_TRUSTED_KEY&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SHELLCHECK.PATH&quot;: &quot;C:\\Users\\david\\AppData\\Roaming\\Google\\AndroidStudio2025.2.1\\plugins\\Shell Script\\shellcheck.exe&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;device.mirroring&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.app.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "PROJECT_TRUSTED_KEY": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SHELLCHECK.PATH": "C:\\Users\\david\\AppData\\Roaming\\Google\\AndroidStudio2025.2.1\\plugins\\Shell Script\\shellcheck.exe",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "git-widget-placeholder": "dev",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "device.mirroring"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;PLAIN_TEXT&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "PLAIN_TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Instituto\appmovil\Git\DesarrolloApp\app\src\main\java\cl\duoc\medicalconsulta\model\domain" />
@@ -325,7 +353,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764994685019</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="listo todo">
+      <option name="closed" value="true" />
+      <created>1766032068013</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1766032068013</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -351,7 +387,9 @@
     <MESSAGE value="readme" />
     <MESSAGE value="." />
     <MESSAGE value="integracion de api" />
-    <option name="LAST_COMMIT_MESSAGE" value="integracion de api" />
+    <MESSAGE value="listo todo" />
+    <MESSAGE value="gestion de usuario y roles" />
+    <option name="LAST_COMMIT_MESSAGE" value="gestion de usuario y roles" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
@@ -368,12 +406,12 @@
         </entry>
         <entry key="cl.duoc.medicalconsulta">
           <value>
-            <CheckInfo lastCheckTimestamp="1764994563790" />
+            <CheckInfo lastCheckTimestamp="1766032997987" />
           </value>
         </entry>
         <entry key="cl.duoc.medicalconsulta.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1764994563794" />
+            <CheckInfo lastCheckTimestamp="1766032997987" />
           </value>
         </entry>
       </map>

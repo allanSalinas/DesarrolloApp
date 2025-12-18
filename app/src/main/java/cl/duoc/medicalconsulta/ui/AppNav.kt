@@ -16,11 +16,14 @@ import kotlinx.coroutines.launch
 
 object Routes {
     const val Login = "login"
+    const val Registro = "registro"
+    const val RecuperarPassword = "recuperar_password"
     const val Start = "start"
     const val Profesionales = "profesionales"
     const val AgendarCita = "agendar_cita"
     const val Historial = "historial"
     const val BuscarMedicamentos = "buscar_medicamentos"
+    const val Perfil = "perfil"
 }
 
 const val CITA_ID_KEY = "citaId"
@@ -36,11 +39,45 @@ fun AppNav() {
         // LOGIN
         composable(Routes.Login) {
             LoginScreen(
-                onAuthenticated = {
+                onAuthenticated = { usuario ->
                     nav.navigate(Routes.Start) {
                         popUpTo(Routes.Login) { inclusive = true }
                         launchSingleTop = true
                     }
+                },
+                onNavigateToRegistro = {
+                    nav.navigate(Routes.Registro)
+                },
+                onNavigateToRecuperar = {
+                    nav.navigate(Routes.RecuperarPassword)
+                }
+            )
+        }
+
+        // REGISTRO
+        composable(Routes.Registro) {
+            RegistroScreen(
+                onRegistroExitoso = {
+                    nav.navigate(Routes.Login) {
+                        popUpTo(Routes.Login) { inclusive = true }
+                    }
+                },
+                onNavigateBack = {
+                    nav.popBackStack()
+                }
+            )
+        }
+
+        // RECUPERAR PASSWORD
+        composable(Routes.RecuperarPassword) {
+            RecuperarPasswordScreen(
+                onRecuperacionExitosa = {
+                    nav.navigate(Routes.Login) {
+                        popUpTo(Routes.Login) { inclusive = true }
+                    }
+                },
+                onNavigateBack = {
+                    nav.popBackStack()
                 }
             )
         }
@@ -119,6 +156,30 @@ fun AppNav() {
                     BuscarMedicamentosScreen()
                 }
             }
+
+            composable(Routes.Perfil) {
+                DrawerScaffold(
+                    currentRoute = Routes.Perfil,
+                    onNavigate = { nav.navigate(it) },
+                    drawerState = drawerState,
+                    scope = scope
+                ) {
+                    // TODO: Obtener ID del usuario autenticado
+                    // Por ahora usamos un ID fijo, en producción debe obtenerse del estado de sesión
+                    PerfilScreen(
+                        usuarioId = 1L,
+                        onNavigateToEdit = {
+                            // Aquí se podría navegar a una pantalla de edición separada
+                            // O reutilizar RegistroScreen en modo edición
+                        },
+                        onCerrarSesion = {
+                            nav.navigate(Routes.Login) {
+                                popUpTo(0) { inclusive = true }
+                            }
+                        }
+                    )
+                }
+            }
         }
     }
 }
@@ -134,6 +195,7 @@ private fun DrawerScaffold(
 ) {
     val destinations = listOf(
         DrawerItem("Inicio", Routes.Start),
+        DrawerItem("Mi Perfil", Routes.Perfil),
         DrawerItem("Profesionales", Routes.Profesionales),
         DrawerItem("Agendar Cita", Routes.AgendarCita),
         DrawerItem("Historial de Citas", Routes.Historial),
@@ -191,6 +253,7 @@ private data class DrawerItem(val label: String, val route: String)
 @Composable
 private fun appBarTitle(route: String?): String = when (route) {
     Routes.Start -> "Inicio"
+    Routes.Perfil -> "Mi Perfil"
     Routes.Profesionales -> "Profesionales Disponibles"
     Routes.AgendarCita -> "Agendar Cita Médica"
     Routes.Historial -> "Historial de Citas"
